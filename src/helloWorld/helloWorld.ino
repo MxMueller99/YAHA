@@ -26,7 +26,9 @@ void setup() {
   Serial.begin(115200);
 <<<<<<< Updated upstream
   Serial.println("WiFi Status is:" + String(init_WiFi()));
-  display_setup();
+  initWiFi();
+  initNTP();
+  displaySetup(); 
   initISR();
 }
 
@@ -38,23 +40,16 @@ void IRAM_ATTR handleButtonPress() {
 void initISR() {
   pinMode(BUTTON_PIN, INPUT_PULLUP); // Initialize the button pin as input with pull-up resistor
   attachInterrupt(digitalPinToInterrupt(BUTTON_PIN), handleButtonPress, FALLING); // Attach the ISR
-=======
-  initWiFi();
-  initNTP();
-  displaySetup(); 
 
-  pinMode(BUTTON_PIN1, INPUT_PULLUP); // Set button pin as input with internal pull-up resistor
-  pinMode(BUTTON_PIN2, INPUT_PULLUP); // Set button pin as input with internal pull-up resistor
- 
->>>>>>> Stashed changes
 }
 
 void loop() {
-
-    if (digitalRead(BUTTON_PIN1) == LOW) { // Check if button 1 is pressed
-    screen1Active = !screen1Active;
+  if (currentScreen==1){
+    displayScreen1();
   }
-
+  else{
+    displayScreen2();
+  }
 }
 
 void displaySetup(){
@@ -88,9 +83,6 @@ void displayScreen1() {
   setCursorWeather();
   tft.println(weatherApiCall());  
   
-  // Delay for 1 second
-  delay(10000);
-  tft.fillScreen(ST77XX_BLACK);
 }
 
 void displayScreen2() {
