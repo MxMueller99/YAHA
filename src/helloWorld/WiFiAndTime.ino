@@ -3,8 +3,8 @@
 
 // WiFi Credentials
 // ToDo Add Environment Variable as preprocessor
-const char* ssid = "Vodafone-C145";
-const char* password = "wwMX4bNuiREfRpUM";
+const char* ssid = "ssid";
+const char* password = "pass";
 
 // NTP Server
 const char* ntp_server = "pool.ntp.org";
