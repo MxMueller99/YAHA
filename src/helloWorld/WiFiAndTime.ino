@@ -3,8 +3,8 @@
 
 // WiFi Credentials
 // ToDo Add Environment Variable as preprocessor
-const char* ssid = "Vodafone-C145";
-const char* password = "wwMX4bNuiREfRpUM";
+const char* ssid = "ssid";
+const char* password = "pass";
 
 // NTP Server
 const char* ntp_server = "pool.ntp.org";
@@ -16,6 +16,7 @@ const int   daylight_offfset_sec = 3600;
 
 // Initialize WiFi connection
 int initWiFi() {
+  Serial.println("init WiFi start");
   WiFi.begin(ssid, password);
   int counter=0;
   while (WiFi.status() != WL_CONNECTED) {
@@ -39,6 +40,7 @@ int getWiFiStatus() {
 
 
 void initNTP() {
+  Serial.println("init NTP start");
   configTime(gmt_offset_sec, daylight_offfset_sec, ntp_server);
 }
 

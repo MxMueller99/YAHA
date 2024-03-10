@@ -1,18 +1,22 @@
 #include <HTTPClient.h>
 #include <ArduinoJson.h>
 
+String msg;
+String apiKey = "cae3530cfe3f8667a7e17679eace2fce";
+String url = "http://api.openweathermap.org/data/2.5/weather?q=Leipzig&units=metric&appid=" + String(apiKey);
+
 String weatherApiCall(){
 
   // Make HTTP request to OpenWeatherMap API
-  String apiKey = "cae3530cfe3f8667a7e17679eace2fce";
+  
   HTTPClient http;
-  String url = "http://api.openweathermap.org/data/2.5/weather?q=Leipzig&units=metric&appid=" + String(apiKey);
+  
   http.begin(url);
 
-  delay(1000);
+  delay(100);
 
   int httpCode = http.GET();
-  String msg;
+  
   if (httpCode > 0) {
 
     String payload = http.getString();  // Parse JSON response
@@ -28,7 +32,9 @@ String weatherApiCall(){
 
   }
   http.end();
+  
   return msg;
+  
 }
 
 
