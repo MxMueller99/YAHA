@@ -2,6 +2,8 @@
 #include <Adafruit_GFX.h>
 #include <Adafruit_ST7789.h>
 
+#define BUTTON_PIN 33
+
 #define TFT_CS     5
 #define TFT_RST    4
 #define TFT_DC     16
@@ -12,6 +14,8 @@
 #define SCREEN_WIDTH  240
 #define SCREEN_HEIGHT 280
 
+volatile int currentScreen = 1; // Use volatile for variables accessed within ISR
+
 // Create an instance of the Adafruit ST7789 library
 Adafruit_ST7789 tft = Adafruit_ST7789(TFT_CS, TFT_DC, TFT_MOSI, TFT_CLK, TFT_RST);
 
@@ -21,7 +25,17 @@ void setup() {
   Serial.begin(115200);
   Serial.println("WiFi Status is:" + String(init_WiFi()));
   display_setup();
-  
+  initISR();
+}
+
+// ISR for button press
+void IRAM_ATTR handleButtonPress() {
+  currentScreen = !currentScreen; // Toggle screen
+}
+
+void initISR() {
+  pinMode(BUTTON_PIN, INPUT_PULLUP); // Initialize the button pin as input with pull-up resistor
+  attachInterrupt(digitalPinToInterrupt(BUTTON_PIN), handleButtonPress, FALLING); // Attach the ISR
 }
 
 void loop() {
