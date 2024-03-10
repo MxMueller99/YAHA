@@ -3,19 +3,19 @@
 
 // WiFi Credentials
 // ToDo Add Environment Variable as preprocessor
-const char* ssid = "ssid";
-const char* password = "pass";
+const char* ssid = "Vodafone-C145";
+const char* password = "wwMX4bNuiREfRpUM";
 
 // NTP Server
 const char* ntp_server = "pool.ntp.org";
 
 // Time zone offset
-const long gmt_offset_sec = 1 * 3600;
+const long gmt_offset_sec = 0 * 3600;
 const int   daylight_offfset_sec = 3600;
 
 
 // Initialize WiFi connection
-int init_WiFi() {
+int initWiFi() {
   WiFi.begin(ssid, password);
   int counter=0;
   while (WiFi.status() != WL_CONNECTED) {
@@ -28,7 +28,7 @@ int init_WiFi() {
   return 0;
 }
 
-int get_WiFi_status() {
+int getWiFiStatus() {
   if(WiFi.status() == WL_CONNECTED) {
     return 0;
   }
@@ -38,11 +38,11 @@ int get_WiFi_status() {
 }
 
 
-int init_NTP() {
+void initNTP() {
   configTime(gmt_offset_sec, daylight_offfset_sec, ntp_server);
 }
 
-String get_time(){
+String getTime(){
   struct tm timeinfo;
 
   // Check if time is available
@@ -52,7 +52,7 @@ String get_time(){
   
   // Buffer to hold the formatted time
   char buffer[64];
-  strftime(buffer, sizeof(buffer), "%A, %B %d %Y %H:%M:%S", &timeinfo);
+  strftime(buffer, sizeof(buffer), "%A, %B %d %Y %H:%M", &timeinfo);
 
   return String(buffer);
 }

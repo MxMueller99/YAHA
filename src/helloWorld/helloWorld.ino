@@ -18,11 +18,13 @@ volatile int currentScreen = 1; // Use volatile for variables accessed within IS
 
 // Create an instance of the Adafruit ST7789 library
 Adafruit_ST7789 tft = Adafruit_ST7789(TFT_CS, TFT_DC, TFT_MOSI, TFT_CLK, TFT_RST);
+bool screen1Active = true;
 
 
 void setup() {
   // Initialize serial communication at a baud rate of 9600
   Serial.begin(115200);
+<<<<<<< Updated upstream
   Serial.println("WiFi Status is:" + String(init_WiFi()));
   display_setup();
   initISR();
@@ -36,24 +38,26 @@ void IRAM_ATTR handleButtonPress() {
 void initISR() {
   pinMode(BUTTON_PIN, INPUT_PULLUP); // Initialize the button pin as input with pull-up resistor
   attachInterrupt(digitalPinToInterrupt(BUTTON_PIN), handleButtonPress, FALLING); // Attach the ISR
+=======
+  initWiFi();
+  initNTP();
+  displaySetup(); 
+
+  pinMode(BUTTON_PIN1, INPUT_PULLUP); // Set button pin as input with internal pull-up resistor
+  pinMode(BUTTON_PIN2, INPUT_PULLUP); // Set button pin as input with internal pull-up resistor
+ 
+>>>>>>> Stashed changes
 }
 
 void loop() {
-  // Print "Hello, world!" to the serial monitor
-  //Serial.println("Time: ");
-  //Serial.println(get_WiFi_status());
-  setCursorTime();
-  tft.println(get_time());
-  setCursorWeather();
-  tft.println(weather_API_call());  
-  
-  // Delay for 1 second
-  delay(10000);
-  tft.fillScreen(ST77XX_BLACK);
-  
+
+    if (digitalRead(BUTTON_PIN1) == LOW) { // Check if button 1 is pressed
+    screen1Active = !screen1Active;
+  }
+
 }
 
-void display_setup(){
+void displaySetup(){
   tft.init(SCREEN_WIDTH, SCREEN_HEIGHT);
   tft.fillScreen(ST77XX_BLACK); // Clear the screen with black color
   tft.setRotation(0);        // Set rotation
@@ -74,4 +78,21 @@ void setCursorTime(){
   // Set the cursor position where the text will start
   tft.setCursor(15, 15);
   //tft.print("Hello, World!"); // Print text to screen
+}
+
+void displayScreen1() {
+
+  tft.fillScreen(ST77XX_BLACK);
+  setCursorTime();
+  tft.println(getTime());
+  setCursorWeather();
+  tft.println(weatherApiCall());  
+  
+  // Delay for 1 second
+  delay(10000);
+  tft.fillScreen(ST77XX_BLACK);
+}
+
+void displayScreen2() {
+  
 }

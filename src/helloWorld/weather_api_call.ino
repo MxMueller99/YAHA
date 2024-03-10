@@ -1,7 +1,7 @@
 #include <HTTPClient.h>
 #include <ArduinoJson.h>
 
-String weather_API_call(){
+String weatherApiCall(){
 
   // Make HTTP request to OpenWeatherMap API
   String apiKey = "cae3530cfe3f8667a7e17679eace2fce";
