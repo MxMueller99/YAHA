@@ -1,12 +1,17 @@
+
+
 void setup() {
   // Initialize serial communication at a baud rate of 9600
   Serial.begin(9600);
+  Serial.println(init_WiFi());
 }
 
 void loop() {
   // Print "Hello, world!" to the serial monitor
-  Serial.println("Hello, world!");
+  //Serial.println("Time: ");
+  Serial.println(get_WiFi_status());
+
   
   // Delay for 1 second
-  delay(10000);
+  delay(1000);
 }
