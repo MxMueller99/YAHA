@@ -1,5 +1,6 @@
 #include <TFT_eSPI.h> 
 #include "BTC_coin.h"
+#include "config.h"
 
 #define BUTTON_PIN 33
 #define SCREEN_WIDTH 240
@@ -11,9 +12,9 @@ volatile bool switchedDisplay = false; // track if screen was switched with butt
 
 // API timed stuff
 unsigned long currentMillis;
-unsigned long previousMillis = 0; // will store last time the screen was updated
+unsigned long previousWthCall = 0; // will store last time the weather was updated
 unsigned long previousBtcCall = 0; // stores previous time BTC API was called
-const long interval = 10000;  // interval at which to switch screens (ms)
+const long intervalWthCall = 1000*60*30;  // interval at which to switch screens (ms)
 const long intervalBtcCall = 1000*60*60;  // interval at which to call BTC API again (ms)
 
 // display object according to user_setup.h of eSPI library
@@ -27,6 +28,7 @@ void setup() {
   initNTP();
   displaySetup(); 
   initISR();
+  setupWeather_API();
   setupBTC_API();
   Serial.println("Setup complete");
 }
@@ -82,7 +84,7 @@ void setCursorBitcoin(){
   tft.setTextColor(TFT_BLUE); // Set text color
   tft.setTextSize(1);          // Set text size
   // Set the cursor position where the text will start
-  tft.setCursor(10, 230);
+  tft.setCursor(110, 230);
 }
 
 void setCursorTime(){
@@ -100,21 +102,25 @@ void displayScreen1() {
     switchedDisplay = false;
   }
   currentMillis = millis();
-  if (currentMillis - previousMillis >= interval) {
-  previousMillis = currentMillis;
-  Serial.println("API Call");
+  if (currentMillis - previousWthCall >= intervalWthCall) {
+  previousWthCall = currentMillis;
   tft.fillScreen(TFT_BLACK);
   setCursorTime();
-  tft.println(getTime());
+  tft.println(getTime(true));
   setCursorWeather();
-  tft.println(weatherApiCall());  
+  tft.println(weatherApiCall(true));  
+  } else {
+    setCursorTime();
+    tft.println(getTime(false));
+    setCursorWeather();
+    tft.println(weatherApiCall(false));
   }
 }
 
 // 2nd display (Bitcoin Tracker)
 void displayScreen2() {
   if(switchedDisplay){
-    tft.fillScreen(TFT_WHITE);
+    tft.fillScreen(TFT_BLACK);
     tft.pushImage(20, 20, 200, 200, BTC_scaled);
     switchedDisplay = false;
   }
@@ -125,7 +131,7 @@ void displayScreen2() {
   setCursorBitcoin();
   tft.println(callBTC_API(true));
   } else {
-    setCursorWeather();
+    setCursorBitcoin();
     tft.println(callBTC_API(false));
   }
   

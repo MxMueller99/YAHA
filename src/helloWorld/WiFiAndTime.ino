@@ -12,6 +12,9 @@ const char* ntp_server = "pool.ntp.org";
 const long gmt_offset_sec = 0 * 3600;
 const int   daylight_offfset_sec = 3600;
 
+// Time temporary
+String oldTime;
+
 
 // Initialize WiFi connection
 int initWiFi() {
@@ -41,21 +44,29 @@ int getWiFiStatus() {
 void initNTP() {
   Serial.println("init NTP start");
   configTime(gmt_offset_sec, daylight_offfset_sec, ntp_server);
+  getTime(true);
 }
 
-String getTime(){
-  struct tm timeinfo;
+String getTime(bool requestAPI){
+  if(requestAPI) {
+    struct tm timeinfo;
 
-  // Check if time is available
-  if (!getLocalTime(&timeinfo, 5000)) { 
-    return "Error fetching time data";
-  }
+    // Check if time is available
+    if (!getLocalTime(&timeinfo, 5000)) { 
+      return "Error fetching time data";
+    }
   
-  // Buffer to hold the formatted time
-  char buffer[64];
-  strftime(buffer, sizeof(buffer), "%A, %B %d %Y %H:%M", &timeinfo);
+    // Buffer to hold the formatted time
+    char buffer[64];
+    strftime(buffer, sizeof(buffer), "%A, %B %d %Y %H:%M", &timeinfo);
+    oldTime = String(buffer);
 
-  return String(buffer);
+    return String(buffer);
+  }
+  else {
+    return oldTime;
+  }
+
 }
 
 
