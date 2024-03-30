@@ -2,9 +2,8 @@
 #include "time.h"
 
 // WiFi Credentials
-// ToDo Add Environment Variable as preprocessor
-const char* ssid = "ssid";
-const char* password = "pass";
+const char* ssid = WIFI_SSID;
+const char* password = WIFI_PASSWORD;
 
 // NTP Server
 const char* ntp_server = "pool.ntp.org";
