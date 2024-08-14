@@ -1,0 +1,101 @@
+(39) boot.esp32: SPI Speed      :�ets Jun  8 2016 00:22:57
+
+rst:0x1 (POWERON_RESET),boot:0x13 (SPI_FAST_FLASH_BOOT)
+configsip: 0, SPIWP:0xee
+clk_drv:0x00,q_drv:0x00,d_drv:0x00,cs0_drv:0x00,hd_drv:0x00,wp_drv:0x00
+mode:DIO, clock div:2
+load:0x3fff0030,len:7172
+load:0x40078000,len:15540
+load:0x40080400,len:4
+ho 8 tail 4 room 4
+load:0x40080404,len:3904
+entry 0x40080640
+[0;32mI (30) boot: ESP-IDF v5.2.1-dirty 2nd stage bootloader[0m
+[0;32mI (30) boot: compile time Jul 24 2024 13:35:32[0m
+[0;32mI (30) boot: Multicore bootloader[0m
+[0;32mI (35) boot: chip revision: v1.0[0m
+[0;32mI (39) boot.esp32: SPI Speed      : 40MHz[0m
+[0;32mI (43) boot.esp32: SPI Mode       : DIO[0m
+[0;32mI (48) boot.esp32: SPI Flash Size : 2MB[0m
+[0;32mI (52) boot: Enabling RNG early entropy source...[0m
+[0;32mI (58) boot: Partition Table:[0m
+[0;32mI (61) boot: ## Label            Usage          Type ST Offset   Length[0m
+[0;32mI (69) boot:  0 nvs              WiFi data        01 02 00009000 00006000[0m
+[0;32mI (76) boot:  1 phy_init         RF data          01 01 0000f000 00001000[0m
+[0;32mI (84) boot:  2 factory          factory app      00 00 00010000 00100000[0m
+[0;32mI (91) boot: End of partition table[0m
+[0;32mI (95) esp_image: segment 0: paddr=00010020 vaddr=3f400020 size=25d7ch (155004) map[0m
+[0;32mI (157) esp_image: segment 1: paddr=00035da4 vaddr=3ffb0000 size=03bf4h ( 15348) load[0m
+[0;32mI (163) esp_image: segment 2: paddr=000399a0 vaddr=40080000 size=06678h ( 26232) load[0m
+[0;32mI (173) esp_image: segment 3: paddr=00040020 vaddr=400d0020 size=96304h (615172) map[0m
+[0;32mI (384) esp_image: segment 4: paddr=000d632c vaddr=40086678 size=0ffach ( 65452) load[0m
+[0;32mI (421) boot: Loaded app from partition at offset 0x10000[0m
+[0;32mI (421) boot: Disabling RNG early entropy source...[0m
+[0;32mI (433) cpu_start: Multicore app[0m
+[0;32mI (442) cpu_start: Pro cpu start user code[0m
+[0;32mI (442) cpu_start: cpu freq: 160000000 Hz[0m
+[0;32mI (442) cpu_start: Application information:[0m
+[0;32mI (445) cpu_start: Project name:     test1[0m
+[0;32mI (450) cpu_start: App version:      1[0m
+[0;32mI (454) cpu_start: Compile time:     Jul 24 2024 13:34:52[0m
+[0;32mI (460) cpu_start: ELF file SHA256:  c2d5dea2d...[0m
+[0;32mI (466) cpu_start: ESP-IDF:          v5.2.1-dirty[0m
+[0;32mI (471) cpu_start: Min chip rev:     v0.0[0m
+[0;32mI (476) cpu_start: Max chip rev:     v3.99 [0m
+[0;32mI (480) cpu_start: Chip rev:         v1.0[0m
+[0;32mI (485) heap_init: Initializing. RAM available for dynamic allocation:[0m
+[0;32mI (493) heap_init: At 3FFAE6E0 len 00001920 (6 KiB): DRAM[0m
+[0;32mI (498) heap_init: At 3FFB82B0 len 00027D50 (159 KiB): DRAM[0m
+[0;32mI (505) heap_init: At 3FFE0440 len 00003AE0 (14 KiB): D/IRAM[0m
+[0;32mI (511) heap_init: At 3FFE4350 len 0001BCB0 (111 KiB): D/IRAM[0m
+[0;32mI (517) heap_init: At 40096624 len 000099DC (38 KiB): IRAM[0m
+[0;32mI (525) spi_flash: detected chip: generic[0m
+[0;32mI (528) spi_flash: flash io: dio[0m
+[0;33mW (532) spi_flash: Detected size(4096k) larger than the size in the binary image header(2048k). Using the size in the binary image header.[0m
+[0;32mI (546) main_task: Started on CPU0[0m
+[0;32mI (556) main_task: Calling app_main()[0m
+[0;32mI (586) wifi_module: ESP_WIFI_MODE_STA Initilization started ...[0m
+I (596) wifi:wifi driver task: 3ffbfef8, prio:23, stack:6656, core=0
+I (606) wifi:wifi firmware version: a9f5b59
+I (606) wifi:wifi certification version: v7.0
+I (616) wifi:config NVS flash: enabled
+I (616) wifi:config nano formating: disabled
+I (616) wifi:Init data frame dynamic rx buffer num: 32
+I (616) wifi:Init static rx mgmt buffer num: 5
+I (626) wifi:Init management short buffer num: 32
+I (626) wifi:Init dynamic tx buffer num: 32
+I (636) wifi:Init static rx buffer size: 1600
+I (636) wifi:Init static rx buffer num: 10
+I (636) wifi:Init dynamic rx buffer num: 32
+[0;32mI (646) wifi_init: rx ba win: 6[0m
+[0;32mI (646) wifi_init: tcpip mbox: 32[0m
+[0;32mI (656) wifi_init: udp mbox: 6[0m
+[0;32mI (656) wifi_init: tcp mbox: 6[0m
+[0;32mI (656) wifi_init: tcp tx win: 5760[0m
+[0;32mI (666) wifi_init: tcp rx win: 5760[0m
+[0;32mI (666) wifi_init: tcp mss: 1440[0m
+[0;32mI (676) wifi_init: WiFi IRAM OP enabled[0m
+[0;32mI (676) wifi_init: WiFi RX IRAM OP enabled[0m
+[0;32mI (686) phy_init: phy_version 4791,2c4672b,Dec 20 2023,16:06:06[0m
+I (766) wifi:mode : sta (9c:9c:1f:c6:74:04)
+I (766) wifi:enable tsf
+[0;32mI (766) wifi_module: Wi-Fi started, connecting ...[0m
+I (776) wifi:new:<1,0>, old:<1,0>, ap:<255,255>, sta:<1,0>, prof:1
+I (776) wifi:state: init -> auth (b0)
+I (786) wifi:state: auth -> assoc (0)
+I (886) wifi:state: assoc -> run (10)
+I (1236) wifi:connected with SMARTments Lotte Laserstein, aid = 1, channel 1, BW20, bssid = 30:e9:8e:41:d2:80
+I (1236) wifi:security: WPA2-PSK, phy: bgn, rssi: -68
+I (1236) wifi:pm start, type: 1
+
+I (1236) wifi:dp: 1, bi: 102400, li: 3, scale listen interval from 307200 us to 307200 us
+I (1256) wifi:<ba-add>idx:0 (ifx:0, 30:e9:8e:41:d2:80), tid:0, ssn:0, winSize:64
+I (1276) wifi:AP's beacon interval = 102400 us, DTIM period = 1
+[0;32mI (10776) main: Fetching weather data...[0m
+[0;31mE (10776) esp-tls: couldn't get hostname for :api.openweathermap.org: getaddrinfo() returns 202, addrinfo=0x0[0m
+[0;31mE (10776) transport_base: Failed to open a new connection: 32769[0m
+[0;31mE (10786) HTTP_CLIENT: Connection failed, sock < 0[0m
+[0;32mI (10786) api_module: HTTP_EVENT_ERROR[0m
+[0;31mE (10796) api_module: HTTP GET request failed: ESP_ERR_HTTP_CONNECT[0m
+[0;32mI (10796) api_module: HTTP_EVENT_DISCONNECTED[0m
+[0;32mI (10806) main_task: Returned from app_main()[0m

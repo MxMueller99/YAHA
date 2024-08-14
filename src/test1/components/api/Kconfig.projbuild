@@ -1,0 +1,15 @@
+menu "API Configuration"
+
+    config OPENWEATHER_API_KEY
+        string "OpenWeatherAPI Key"
+        default "myKey"
+        help
+            Key used to retrieve information from OpenWeather
+    
+    config OPENWEATHER_CITY
+        string "OpenWeather City"
+        default "Berlin"
+        help
+            City used to retrieve information from OpenWeather
+
+endmenu
